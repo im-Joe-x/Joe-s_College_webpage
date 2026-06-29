@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Joe College of Engineering & Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #1E3A5F;
+    --navy-light: #2C5282;
+    --gold: #C8942A;
+    --gold-light: #E5B84A;
+    --cream: #F8F4EE;
+    --white: #FFFFFF;
+    --text-dark: #1a1a2e;
+    --text-muted: #64748b;
+    --border: rgba(200,148,42,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,22,40,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 70px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .logo-emblem {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 1.4rem;
+    color: var(--navy);
+    letter-spacing: -1px;
+    flex-shrink: 0;
+  }
+  .logo-text { display: flex; flex-direction: column; }
+  .logo-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 0.95rem;
+    color: var(--white); line-height: 1.1; letter-spacing: 0.01em;
+  }
+  .logo-sub {
+    font-size: 0.62rem; font-weight: 500;
+    color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none; color: rgba(255,255,255,0.8);
+    font-size: 0.87rem; font-weight: 500; letter-spacing: 0.03em;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--gold);
+    transform: scaleX(0); transition: transform 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy) !important;
+    padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; }
+  .nav-cta::after { display: none !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--white); transition: 0.3s; }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative; min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .blueprint-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(200,148,42,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,148,42,0.07) 1px, transparent 1px),
+      linear-gradient(rgba(200,148,42,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,148,42,0.03) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    animation: gridDrift 40s linear infinite;
+  }
+  @keyframes gridDrift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100px); }
+  }
+  .hero-glow {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(30,58,95,0.6) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+    padding-top: 80px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,148,42,0.15);
+    border: 1px solid rgba(200,148,42,0.4);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+    color: var(--gold-light); text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+  }
+  .hero-badge-dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; animation: pulse 2s ease infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--white); margin-bottom: 1.5rem;
+  }
+  .hero-title span { color: var(--gold); display: block; }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 2.5rem; max-width: 480px;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy);
+    padding: 0.85rem 2rem; border-radius: 8px;
+    font-weight: 700; font-size: 0.95rem;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: all 0.2s; border: 2px solid var(--gold);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 8px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; letter-spacing: 0.02em;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  /* Hero right — floating card */
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,148,42,0.2);
+    border-radius: 16px; padding: 1.5rem;
+    backdrop-filter: blur(10px);
+  }
+  .hero-card-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 1.05rem;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .stat-box {
+    background: rgba(200,148,42,0.08); border-radius: 10px; padding: 1rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900; color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); margin-top: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .accred-strip {
+    display: flex; gap: 0.8rem; flex-wrap: wrap;
+  }
+  .accred-badge {
+    background: rgba(200,148,42,0.12);
+    border: 1px solid rgba(200,148,42,0.3);
+    border-radius: 6px; padding: 0.4rem 0.8rem;
+    font-size: 0.72rem; font-weight: 600; color: var(--gold);
+    letter-spacing: 0.06em;
+  }
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.35); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    animation: bounce 2.5s ease infinite;
+    z-index: 2;
+  }
+  .scroll-arrow { width: 20px; height: 20px; border-right: 2px solid; border-bottom: 2px solid; transform: rotate(45deg); border-color: var(--gold); }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1280px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--gold); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.9rem);
+    font-weight: 800; line-height: 1.2; color: var(--navy);
+    margin-bottom: 1.2rem;
+  }
+  .section-title.light { color: var(--white); }
+  .section-desc { font-size: 1rem; line-height: 1.8; color: var(--text-muted); max-width: 560px; }
+  .section-desc.light { color: rgba(255,255,255,0.65); }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    background: var(--gold);
+    padding: 0.9rem 0; overflow: hidden;
+  }
+  .marquee-track {
+    display: flex; gap: 0; white-space: nowrap;
+    animation: marquee 25s linear infinite;
+  }
+  .marquee-item {
+    display: inline-flex; align-items: center; gap: 1.5rem;
+    padding: 0 2rem;
+    font-weight: 700; font-size: 0.82rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--navy);
+  }
+  .marquee-dot { width: 5px; height: 5px; background: var(--navy); border-radius: 50; opacity: 0.5; }
+  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .about-image-wrap {
+    position: relative;
+  }
+  .about-image {
+    width: 100%; aspect-ratio: 4/3; border-radius: 16px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy-light) 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  .campus-svg-illus {
+    width: 80%; opacity: 0.9;
+  }
+  .about-badge-float {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    background: var(--gold);
+    border-radius: 12px; padding: 1.2rem 1.5rem;
+    text-align: center; box-shadow: 0 20px 40px rgba(200,148,42,0.35);
+  }
+  .about-badge-float strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem; font-weight: 900; color: var(--navy); display: block; line-height: 1;
+  }
+  .about-badge-float span { font-size: 0.72rem; color: var(--navy); opacity: 0.7; font-weight: 600; letter-spacing: 0.08em; }
+  .about-points { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+  .about-point {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.1rem; border-radius: 10px;
+    border: 1px solid rgba(200,148,42,0.15);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .about-point:hover { border-color: var(--gold); box-shadow: 0 4px 20px rgba(200,148,42,0.1); }
+  .about-point-icon {
+    width: 42px; height: 42px; flex-shrink: 0;
+    background: rgba(200,148,42,0.1); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  }
+  .about-point-text h4 { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; color: var(--navy); }
+  .about-point-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── STATS COUNTER ── */
+  #stats { background: var(--navy); padding: 4.5rem 2rem; }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    border: 1px solid rgba(200,148,42,0.2); border-radius: 16px; overflow: hidden;
+  }
+  .stat-item {
+    padding: 2.5rem 2rem; text-align: center;
+    border-right: 1px solid rgba(200,148,42,0.15);
+    background: rgba(30,58,95,0.3);
+    transition: background 0.3s;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(200,148,42,0.08); }
+  .stat-count {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem; font-weight: 900; color: var(--gold);
+    line-height: 1;
+  }
+  .stat-unit { font-size: 1.4rem; color: var(--gold-light); }
+  .stat-desc { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 8px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ── DEPARTMENTS ── */
+  #departments { background: var(--cream); }
+  .dept-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem;
+  }
+  .dept-card {
+    background: var(--white); border-radius: 14px;
+    border: 1px solid rgba(200,148,42,0.12);
+    padding: 2rem; position: relative; overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    cursor: default;
+  }
+  .dept-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform: scaleX(0); transition: transform 0.3s; transform-origin: left;
+  }
+  .dept-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(10,22,40,0.12); border-color: var(--gold); }
+  .dept-card:hover::before { transform: scaleX(1); }
+  .dept-icon {
+    font-size: 2rem; margin-bottom: 1rem;
+    width: 56px; height: 56px; background: rgba(200,148,42,0.1); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .dept-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+  .dept-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+  .dept-meta { margin-top: 1.2rem; display: flex; gap: 1rem; }
+  .dept-tag {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--gold); background: rgba(200,148,42,0.08); border-radius: 4px; padding: 3px 8px;
+  }
+
+  /* ── PROGRAMS ── */
+  #programs { background: var(--navy); }
+  .programs-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+  .programs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.2rem; }
+  .prog-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,148,42,0.18);
+    border-radius: 12px; padding: 1.5rem;
+    display: flex; align-items: center; gap: 1.2rem;
+    transition: background 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+  .prog-card:hover { background: rgba(200,148,42,0.08); border-color: var(--gold); }
+  .prog-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900; color: var(--gold); opacity: 0.4;
+    min-width: 40px; text-align: center;
+  }
+  .prog-info h4 { font-weight: 700; color: var(--white); margin-bottom: 3px; font-size: 0.97rem; }
+  .prog-info p { font-size: 0.8rem; color: rgba(255,255,255,0.45); }
+  .prog-arrow { margin-left: auto; color: var(--gold); opacity: 0; transition: opacity 0.2s; font-size: 1.1rem; }
+  .prog-card:hover .prog-arrow { opacity: 1; }
+
+  /* ── CAMPUS LIFE ── */
+  #campus { background: var(--white); }
+  .campus-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 1.2rem; margin-top: 3rem;
+  }
+  .campus-card {
+    border-radius: 14px; overflow: hidden; position: relative;
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    min-height: 200px;
+    display: flex; align-items: flex-end; padding: 1.5rem;
+    cursor: default; transition: transform 0.25s;
+  }
+  .campus-card:hover { transform: scale(1.02); }
+  .campus-card.tall { grid-row: span 2; min-height: 420px; }
+  .campus-card-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 4rem;
+    opacity: 0.15;
+  }
+  .campus-card-content { position: relative; z-index: 1; }
+  .campus-card-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 4px;
+  }
+  .campus-card-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: var(--white); }
+  .campus-card-desc { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 4px; }
+  .campus-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(10,22,40,0.85) 0%, transparent 55%);
+  }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--cream); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .testi-card {
+    background: var(--white); border-radius: 14px; padding: 2rem;
+    border: 1px solid rgba(200,148,42,0.12);
+    position: relative;
+  }
+  .testi-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; line-height: 1; color: var(--gold); opacity: 0.3;
+    margin-bottom: 0.5rem;
+  }
+  .testi-text { font-size: 0.9rem; line-height: 1.75; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy-mid), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.95rem; color: var(--white);
+    flex-shrink: 0;
+  }
+  .testi-name { font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+  .testi-role { font-size: 0.75rem; color: var(--text-muted); }
+  .testi-stars { color: var(--gold); font-size: 0.75rem; letter-spacing: 2px; margin-top: 2px; }
+
+  /* ── ADMISSIONS ── */
+  #admissions { background: var(--navy); }
+  .admissions-inner {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start;
+  }
+  .admission-steps { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; }
+  .admission-step {
+    display: flex; gap: 1.2rem; padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(200,148,42,0.12);
+    align-items: flex-start;
+  }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 900; color: var(--gold); opacity: 0.3;
+    min-width: 40px; line-height: 1;
+  }
+  .step-info h4 { color: var(--white); font-weight: 700; margin-bottom: 4px; }
+  .step-info p { color: rgba(255,255,255,0.5); font-size: 0.85rem; line-height: 1.6; }
+  .admission-form {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,148,42,0.2);
+    border-radius: 16px; padding: 2.5rem;
+  }
+  .form-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.6); margin-bottom: 6px; letter-spacing: 0.05em; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 0.75rem 1rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(200,148,42,0.25);
+    border-radius: 8px; color: var(--white); font-family: 'Inter', sans-serif;
+    font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--navy); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .submit-btn {
+    width: 100%; padding: 0.95rem;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border: none; border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700; font-size: 1rem; color: var(--navy);
+    cursor: pointer; transition: opacity 0.2s, transform 0.2s; margin-top: 0.5rem;
+  }
+  .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* ── NEWS ── */
+  #news { background: var(--white); }
+  .news-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .news-card {
+    border-radius: 14px; overflow: hidden; border: 1px solid rgba(200,148,42,0.12);
+    transition: transform 0.25s, box-shadow 0.25s; cursor: pointer;
+  }
+  .news-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(10,22,40,0.1); }
+  .news-img {
+    height: 160px;
+    background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy-light) 100%);
+    display: flex; align-items: center; justify-content: center; font-size: 3rem;
+  }
+  .news-body { padding: 1.5rem; }
+  .news-cat { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .news-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.4; }
+  .news-excerpt { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1rem; }
+  .news-date { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* ── FOOTER ── */
+  footer { background: #060f1c; padding: 4rem 2rem 0; }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    border-bottom: 1px solid rgba(200,148,42,0.12);
+    padding-bottom: 3rem; max-width: 1280px; margin: 0 auto;
+  }
+  .footer-brand p { font-size: 0.87rem; color: rgba(255,255,255,0.4); margin-top: 1rem; line-height: 1.7; }
+  .footer-socials { display: flex; gap: 0.6rem; margin-top: 1.5rem; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: rgba(200,148,42,0.1); border: 1px solid rgba(200,148,42,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 0.85rem; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .social-btn:hover { background: rgba(200,148,42,0.25); }
+  .footer-col h5 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul li a { font-size: 0.85rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom {
+    max-width: 1280px; margin: 0 auto;
+    padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0; background: rgba(10,22,40,0.98); padding: 1.5rem 2rem; gap: 1.2rem; }
+    .hero-content { grid-template-columns: 1fr; padding-top: 100px; text-align: center; }
+    .hero-desc { max-width: 100%; }
+    .hero-actions { justify-content: center; }
+    .hero-visual { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+    .dept-grid { grid-template-columns: repeat(2,1fr); }
+    .programs-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .programs-grid { grid-template-columns: 1fr; }
+    .campus-grid { grid-template-columns: 1fr 1fr; }
+    .campus-card.tall { grid-row: auto; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .admissions-inner { grid-template-columns: 1fr; }
+    .news-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+  @media (max-width: 560px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .dept-grid { grid-template-columns: 1fr; }
+    .campus-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+  }
+
+  /* Animations on scroll */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <div class="logo-emblem">JC</div>
+      <div class="logo-text">
+        <span class="logo-name">Joe College of Engineering</span>
+        <span class="logo-sub">& Technology — Est. 1994</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#departments">Departments</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#campus">Campus</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#admissions" class="nav-cta">Apply Now →</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="blueprint-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Admissions Open 2025–26
+      </div>
+      <h1 class="hero-title">
+        Engineering<br/>Tomorrow's<br/><span>World Leaders</span>
+      </h1>
+      <p class="hero-desc">
+        Joe College of Engineering & Technology has shaped brilliant minds since 1994. Join a legacy of innovation, research, and excellence that places our graduates at the forefront of global industry.
+      </p>
+      <div class="hero-actions">
+        <a href="#admissions" class="btn-primary">Apply for 2025–26 →</a>
+        <a href="#about" class="btn-outline">Explore Campus</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-title">🏆 Rankings & Recognition</div>
+        <div class="hero-stats">
+          <div class="stat-box">
+            <div class="stat-num">A+</div>
+            <div class="stat-label">NAAC Grade</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">#18</div>
+            <div class="stat-label">NIRF Rank</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">98%</div>
+            <div class="stat-label">Placement Rate</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">250+</div>
+            <div class="stat-label">Industry Partners</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-title">📋 Accreditations</div>
+        <div class="accred-strip">
+          <span class="accred-badge">AICTE</span>
+          <span class="accred-badge">NBA</span>
+          <span class="accred-badge">UGC Approved</span>
+          <span class="accred-badge">ISO 9001:2015</span>
+          <span class="accred-badge">Anna University</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Computer Science <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mechanical Engineering <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Civil Engineering <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Electronics & Comm. <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Artificial Intelligence <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Data Science <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Electrical Engineering <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Biotechnology <span class="marquee-dot"></span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Computer Science <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mechanical Engineering <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Civil Engineering <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Electronics & Comm. <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Artificial Intelligence <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Data Science <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Electrical Engineering <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Biotechnology <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image-wrap fade-up">
+        <div class="about-image">
+          <!-- SVG campus illustration -->
+          <svg class="campus-svg-illus" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Building main -->
+            <rect x="80" y="100" width="240" height="150" fill="rgba(200,148,42,0.15)" stroke="rgba(200,148,42,0.5)" stroke-width="1.5"/>
+            <!-- Columns -->
+            <rect x="95" y="110" width="18" height="140" fill="rgba(200,148,42,0.2)" stroke="rgba(200,148,42,0.4)" stroke-width="1"/>
+            <rect x="130" y="110" width="18" height="140" fill="rgba(200,148,42,0.2)" stroke="rgba(200,148,42,0.4)" stroke-width="1"/>
+            <rect x="252" y="110" width="18" height="140" fill="rgba(200,148,42,0.2)" stroke="rgba(200,148,42,0.4)" stroke-width="1"/>
+            <rect x="287" y="110" width="18" height="140" fill="rgba(200,148,42,0.2)" stroke="rgba(200,148,42,0.4)" stroke-width="1"/>
+            <!-- Portico roof -->
+            <polygon points="75,108 325,108 310,90 90,90" fill="rgba(200,148,42,0.25)" stroke="rgba(200,148,42,0.6)" stroke-width="1.5"/>
+            <!-- Dome -->
+            <ellipse cx="200" cy="90" rx="42" ry="12" fill="rgba(200,148,42,0.15)" stroke="rgba(200,148,42,0.5)" stroke-width="1.5"/>
+            <path d="M158 90 Q200 40 242 90" fill="rgba(200,148,42,0.2)" stroke="rgba(200,148,42,0.6)" stroke-width="1.5"/>
+            <!-- Windows -->
+            <rect x="160" y="120" width="28" height="22" rx="2" fill="rgba(200,148,42,0.1)" stroke="rgba(200,148,42,0.4)" stroke-width="1"/>
+            <rect x="212" y="120" width="28" height="22" rx="2" fill="rgba(200,148,42,0.1)" stroke="rgba(200,148,42,0.4)" stroke-width="1"/>
+            <rect x="160" y="155" width="28" height="22" rx="2" fill="rgba(200,148,42,0.1)" stroke="rgba(200,148,42,0.4)" stroke-width="1"/>
+            <rect x="212" y="155" width="28" height="22" rx="2" fill="rgba(200,148,42,0.1)" stroke="rgba(200,148,42,0.4)" stroke-width="1"/>
+            <!-- Door -->
+            <rect x="182" y="200" width="36" height="50" rx="3" fill="rgba(200,148,42,0.15)" stroke="rgba(200,148,42,0.5)" stroke-width="1.5"/>
+            <path d="M200 200 Q182 190 182 175 Q182 155 200 155 Q218 155 218 175 Q218 190 200 200" fill="rgba(200,148,42,0.1)" stroke="rgba(200,148,42,0.4)" stroke-width="1"/>
+            <!-- Ground -->
+            <line x1="60" y1="250" x2="340" y2="250" stroke="rgba(200,148,42,0.3)" stroke-width="1"/>
+            <!-- Trees -->
+            <circle cx="50" cy="220" r="22" fill="rgba(200,148,42,0.12)" stroke="rgba(200,148,42,0.3)" stroke-width="1"/>
+            <line x1="50" y1="242" x2="50" y2="260" stroke="rgba(200,148,42,0.3)" stroke-width="2"/>
+            <circle cx="350" cy="220" r="22" fill="rgba(200,148,42,0.12)" stroke="rgba(200,148,42,0.3)" stroke-width="1"/>
+            <line x1="350" y1="242" x2="350" y2="260" stroke="rgba(200,148,42,0.3)" stroke-width="2"/>
+            <!-- Flag -->
+            <line x1="200" y1="30" x2="200" y2="55" stroke="rgba(200,148,42,0.6)" stroke-width="1.5"/>
+            <polygon points="200,30 220,36 200,42" fill="rgba(200,148,42,0.5)"/>
+          </svg>
+        </div>
+        <div class="about-badge-float">
+          <strong>30+</strong>
+          <span>Years of Excellence</span>
+        </div>
+      </div>
+      <div class="fade-up">
+        <div class="section-eyebrow">About JCET</div>
+        <h2 class="section-title">A Premier Institution<br/>Rooted in Innovation</h2>
+        <p class="section-desc">Founded in 1994, Joe College of Engineering and Technology stands as one of Tamil Nadu's most respected engineering institutions. We combine rigorous academics with hands-on research to produce engineers who solve real-world problems.</p>
+        <div class="about-points">
+          <div class="about-point">
+            <div class="about-point-icon">🎓</div>
+            <div class="about-point-text">
+              <h4>World-Class Faculty</h4>
+              <p>Over 180 faculty members with PhDs from IITs, NITs, and top international universities.</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="about-point-icon">🔬</div>
+            <div class="about-point-text">
+              <h4>Cutting-Edge Research Labs</h4>
+              <p>40+ specialized labs including AI/ML, robotics, VLSI design, and advanced materials.</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="about-point-icon">🌐</div>
+            <div class="about-point-text">
+              <h4>Global Industry Connections</h4>
+              <p>MoUs with Google, TCS, L&T, Bosch, and 250+ companies for internships and placements.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-grid fade-up">
+      <div class="stat-item">
+        <div class="stat-count"><span class="counter" data-target="12000">0</span><span class="stat-unit">+</span></div>
+        <div class="stat-desc">Students Enrolled</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-count"><span class="counter" data-target="25000">0</span><span class="stat-unit">+</span></div>
+        <div class="stat-desc">Alumni Worldwide</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-count"><span class="counter" data-target="98">0</span><span class="stat-unit">%</span></div>
+        <div class="stat-desc">Placement Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-count">₹<span class="counter" data-target="18">0</span><span class="stat-unit">L</span></div>
+        <div class="stat-desc">Avg. Salary Package</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPARTMENTS -->
+<section id="departments">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-eyebrow">Academic Divisions</div>
+      <h2 class="section-title">Our Departments</h2>
+      <p class="section-desc">Twelve departments offering undergraduate, postgraduate, and doctoral programmes across engineering and applied sciences.</p>
+    </div>
+    <div class="dept-grid fade-up">
+      <div class="dept-card">
+        <div class="dept-icon">💻</div>
+        <div class="dept-name">Computer Science & Engineering</div>
+        <div class="dept-desc">Covering software systems, algorithms, AI, cloud computing, and cybersecurity with strong industry partnerships.</div>
+        <div class="dept-meta"><span class="dept-tag">B.E / M.E / Ph.D</span><span class="dept-tag">NBA Accredited</span></div>
+      </div>
+      <div class="dept-card">
+        <div class="dept-icon">🤖</div>
+        <div class="dept-name">Artificial Intelligence & Data Science</div>
+        <div class="dept-desc">India's fastest-growing department, training engineers in ML, deep learning, and data analytics for a data-driven era.</div>
+        <div class="dept-meta"><span class="dept-tag">B.E / M.Tech</span><span class="dept-tag">New 2022</span></div>
+      </div>
+      <div class="dept-card">
+        <div class="dept-icon">⚡</div>
+        <div class="dept-name">Electrical & Electronics Engineering</div>
+        <div class="dept-desc">Power systems, control engineering, embedded systems, and smart grid technologies for a sustainable future.</div>
+        <div class="dept-meta"><span class="dept-tag">B.E / M.E / Ph.D</span><span class="dept-tag">NBA Accredited</span></div>
+      </div>
+      <div class="dept-card">
+        <div class="dept-icon">📡</div>
+        <div class="dept-name">Electronics & Communication</div>
+        <div class="dept-desc">VLSI, signal processing, wireless communication, and IoT — spanning from circuits to communication networks.</div>
+        <div class="dept-meta"><span class="dept-tag">B.E / M.E</span><span class="dept-tag">NBA Accredited</span></div>
+      </div>
+      <div class="dept-card">
+        <div class="dept-icon">⚙️</div>
+        <div class="dept-name">Mechanical Engineering</div>
+        <div class="dept-desc">Manufacturing, thermodynamics, robotics, and CAD/CAM with access to world-class prototyping and testing facilities.</div>
+        <div class="dept-meta"><span class="dept-tag">B.E / M.E / Ph.D</span><span class="dept-tag">NBA Accredited</span></div>
+      </div>
+      <div class="dept-card">
+        <div class="dept-icon">🏗️</div>
+        <div class="dept-name">Civil Engineering</div>
+        <div class="dept-desc">Structural, geotechnical, environmental, and transportation engineering backed by state-of-the-art survey labs.</div>
+        <div class="dept-meta"><span class="dept-tag">B.E / M.E / Ph.D</span><span class="dept-tag">NBA Accredited</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="container">
+    <div class="programs-header fade-up">
+      <div>
+        <div class="section-eyebrow" style="color:var(--gold)">Degrees Offered</div>
+        <h2 class="section-title light">Academic Programmes</h2>
+        <p class="section-desc light">Flexible learning pathways from undergraduate to doctoral levels, designed for the demands of tomorrow's industry.</p>
+      </div>
+      <a href="#admissions" class="btn-primary" style="flex-shrink:0">View All Courses →</a>
+    </div>
+    <div class="programs-grid fade-up">
+      <div class="prog-card">
+        <div class="prog-num">01</div>
+        <div class="prog-info"><h4>B.E / B.Tech (4 Years)</h4><p>12 specialisations · Intake 2,400 students</p></div>
+        <div class="prog-arrow">→</div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-num">02</div>
+        <div class="prog-info"><h4>M.E / M.Tech (2 Years)</h4><p>10 specialisations · Research & industry track</p></div>
+        <div class="prog-arrow">→</div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-num">03</div>
+        <div class="prog-info"><h4>MBA — Technology Management</h4><p>AICTE approved · 2-year full-time programme</p></div>
+        <div class="prog-arrow">→</div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-num">04</div>
+        <div class="prog-info"><h4>MCA — Computer Applications</h4><p>Industry-aligned curriculum · Cloud & DevOps electives</p></div>
+        <div class="prog-arrow">→</div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-num">05</div>
+        <div class="prog-info"><h4>Ph.D Research Programme</h4><p>Full-time & part-time · 6 research centres</p></div>
+        <div class="prog-arrow">→</div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-num">06</div>
+        <div class="prog-info"><h4>Diploma & Certificate Courses</h4><p>Short-term upskilling · Online & offline modes</p></div>
+        <div class="prog-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPUS LIFE -->
+<section id="campus">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-eyebrow">Beyond the Classroom</div>
+      <h2 class="section-title">Campus Life at JCET</h2>
+      <p class="section-desc">A 65-acre green campus designed to inspire: from top-tier sports facilities to vibrant cultural clubs and innovation hubs.</p>
+    </div>
+    <div class="campus-grid fade-up">
+      <div class="campus-card tall" style="background: linear-gradient(160deg,#0A1628,#1E3A5F);">
+        <div class="campus-card-overlay"></div>
+        <div class="campus-card-bg">🏛️</div>
+        <div class="campus-card-content">
+          <div class="campus-card-label">Heart of Campus</div>
+          <div class="campus-card-title">Central Library & Knowledge Hub</div>
+          <div class="campus-card-desc">2 lakh+ volumes, IEEE digital access, 24/7 reading zones</div>
+        </div>
+      </div>
+      <div class="campus-card" style="background: linear-gradient(135deg,#1a2a4a,#2C5282);">
+        <div class="campus-card-overlay"></div>
+        <div class="campus-card-bg">🔬</div>
+        <div class="campus-card-content">
+          <div class="campus-card-label">Innovation</div>
+          <div class="campus-card-title">Research & Incubation Centre</div>
+          <div class="campus-card-desc">Startup support, seed funding & mentorship</div>
+        </div>
+      </div>
+      <div class="campus-card" style="background: linear-gradient(135deg,#1a2820,#2a4a38);">
+        <div class="campus-card-overlay"></div>
+        <div class="campus-card-bg">🏆</div>
+        <div class="campus-card-content">
+          <div class="campus-card-label">Athletics</div>
+          <div class="campus-card-title">Sports Complex</div>
+          <div class="campus-card-desc">Indoor stadium, cricket ground, swimming pool</div>
+        </div>
+      </div>
+      <div class="campus-card" style="background: linear-gradient(135deg,#2a1a3a,#3d2a5a);">
+        <div class="campus-card-overlay"></div>
+        <div class="campus-card-bg">🎭</div>
+        <div class="campus-card-content">
+          <div class="campus-card-label">Culture</div>
+          <div class="campus-card-title">Arts & Cultural Centre</div>
+          <div class="campus-card-desc">Annual fest GENESIS attracting 10,000+ participants</div>
+        </div>
+      </div>
+      <div class="campus-card" style="background: linear-gradient(135deg,#1a2838,#2C4A5F);">
+        <div class="campus-card-overlay"></div>
+        <div class="campus-card-bg">🏠</div>
+        <div class="campus-card-content">
+          <div class="campus-card-label">Residential</div>
+          <div class="campus-card-title">Hostel & Dining</div>
+          <div class="campus-card-desc">3,000-bed capacity with AC, Wi-Fi & 4 mess options</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="fade-up" style="text-align:center">
+      <div class="section-eyebrow" style="justify-content:center">Alumni Speak</div>
+      <h2 class="section-title" style="text-align:center">What Our Graduates Say</h2>
+    </div>
+    <div class="testi-grid fade-up">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">JCET gave me more than a degree — it gave me a mindset. The research environment and faculty mentorship prepared me for my role at Google far better than I could have imagined.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AR</div>
+          <div>
+            <div class="testi-name">Arjun Raghunathan</div>
+            <div class="testi-role">Senior Software Engineer, Google — CSE Batch 2018</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The industry exposure through internships and live projects was unmatched. I founded my startup three months after graduating — JCET's entrepreneurship cell planted that seed.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">PK</div>
+          <div>
+            <div class="testi-name">Priya Krishnamurthy</div>
+            <div class="testi-role">Founder & CEO, NeuralStack — AI Batch 2020</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The faculty here treat you as a colleague, not just a student. I published two international research papers as an undergraduate — an opportunity I wouldn't trade for anything.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SM</div>
+          <div>
+            <div class="testi-name">Sathish Manikandan</div>
+            <div class="testi-role">Research Scientist, ISRO — ECE Batch 2017</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section id="admissions">
+  <div class="container">
+    <div class="admissions-inner">
+      <div class="fade-up">
+        <div class="section-eyebrow" style="color:var(--gold)">Join JCET</div>
+        <h2 class="section-title light">Your Journey<br/>Starts Here</h2>
+        <p class="section-desc light">Applications for the 2025–26 academic year are now open. Take the first step towards an engineering career that matters.</p>
+        <div class="admission-steps">
+          <div class="admission-step">
+            <div class="step-num">01</div>
+            <div class="step-info">
+              <h4>Register Online</h4>
+              <p>Complete the online application form with your academic details and upload required documents.</p>
+            </div>
+          </div>
+          <div class="admission-step">
+            <div class="step-num">02</div>
+            <div class="step-info">
+              <h4>Entrance / Merit Screening</h4>
+              <p>Appear for TNEA / JEE Main counselling or our institutional entrance test for lateral entry.</p>
+            </div>
+          </div>
+          <div class="admission-step">
+            <div class="step-num">03</div>
+            <div class="step-info">
+              <h4>Counselling & Allotment</h4>
+              <p>Attend the counselling session, choose your department, and receive your seat allotment letter.</p>
+            </div>
+          </div>
+          <div class="admission-step">
+            <div class="step-num">04</div>
+            <div class="step-info">
+              <h4>Fee Payment & Joining</h4>
+              <p>Complete fee payment and report for orientation. Welcome to the JCET family!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="admission-form fade-up">
+        <div class="form-title">Request Information</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Your first name"/>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Your last name"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@email.com"/>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX"/>
+        </div>
+        <div class="form-group">
+          <label>Programme of Interest</label>
+          <select>
+            <option value="">Select a programme</option>
+            <option>B.E Computer Science & Engineering</option>
+            <option>B.E Artificial Intelligence & Data Science</option>
+            <option>B.E Electronics & Communication</option>
+            <option>B.E Electrical & Electronics</option>
+            <option>B.E Mechanical Engineering</option>
+            <option>B.E Civil Engineering</option>
+            <option>M.E / M.Tech</option>
+            <option>MBA Technology Management</option>
+            <option>Ph.D Research</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message (Optional)</label>
+          <textarea placeholder="Any specific queries or requirements…"></textarea>
+        </div>
+        <button class="submit-btn" onclick="handleSubmit(this)">Submit Enquiry →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="container">
+    <div class="fade-up" style="display:flex;justify-content:space-between;align-items:flex-end">
+      <div>
+        <div class="section-eyebrow">Latest Updates</div>
+        <h2 class="section-title">News & Events</h2>
+      </div>
+      <a href="#" class="btn-outline" style="color:var(--navy);border-color:rgba(10,22,40,0.25);flex-shrink:0">All News →</a>
+    </div>
+    <div class="news-grid fade-up">
+      <div class="news-card">
+        <div class="news-img">🏅</div>
+        <div class="news-body">
+          <div class="news-cat">Achievement</div>
+          <div class="news-title">JCET Team Wins National Smart India Hackathon 2024</div>
+          <p class="news-excerpt">A five-member team from our CSE department clinched first place among 3,800 teams nationwide with an AI-powered water management solution.</p>
+          <div class="news-date">December 14, 2024</div>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-img">🤝</div>
+        <div class="news-body">
+          <div class="news-cat">Industry Partnership</div>
+          <div class="news-title">MoU Signed with Microsoft India for Cloud Computing Centre</div>
+          <p class="news-excerpt">JCET becomes one of only 12 institutions in India to host an official Microsoft Azure Innovation Lab on campus.</p>
+          <div class="news-date">November 5, 2024</div>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-img">🎓</div>
+        <div class="news-body">
+          <div class="news-cat">Placements</div>
+          <div class="news-title">Record Placements: 98.6% Batch 2024 Placed Before Graduation</div>
+          <p class="news-excerpt">Amazon, Infosys, Wipro, and L&T were among the top recruiters, with the highest package reaching ₹42 LPA.</p>
+          <div class="news-date">October 22, 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#" style="text-decoration:none">
+        <div class="logo-emblem">JC</div>
+        <div class="logo-text">
+          <span class="logo-name">Joe College of Engineering</span>
+          <span class="logo-sub">& Technology</span>
+        </div>
+      </a>
+      <p>Shaping engineers and innovators since 1994. Committed to academic excellence, cutting-edge research, and holistic development of every student.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="#" title="Facebook">f</a>
+        <a class="social-btn" href="#" title="Twitter">𝕏</a>
+        <a class="social-btn" href="#" title="Instagram">▣</a>
+        <a class="social-btn" href="#" title="LinkedIn">in</a>
+        <a class="social-btn" href="#" title="YouTube">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Academics</h5>
+      <ul>
+        <li><a href="#">Departments</a></li>
+        <li><a href="#">Programmes</a></li>
+        <li><a href="#">Research</a></li>
+        <li><a href="#">Syllabus & Regulations</a></li>
+        <li><a href="#">Academic Calendar</a></li>
+        <li><a href="#">E-Learning Portal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Campus</h5>
+      <ul>
+        <li><a href="#">Campus Tour</a></li>
+        <li><a href="#">Hostels</a></li>
+        <li><a href="#">Sports & Recreation</a></li>
+        <li><a href="#">Library</a></li>
+        <li><a href="#">Cafeteria</a></li>
+        <li><a href="#">Transport</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="#">📍 Salem – Coimbatore Rd, Tamil Nadu</a></li>
+        <li><a href="#">📞 +91 427 XXXX XXX</a></li>
+        <li><a href="#">✉️ admissions@jcet.edu.in</a></li>
+        <li><a href="#">Grievance Portal</a></li>
+        <li><a href="#">Anti-Ragging Cell</a></li>
+        <li><a href="#">NIRF Data</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Joe College of Engineering and Technology. All rights reserved.</p>
+    <p>Privacy Policy · Terms of Use · RTI</p>
+  </div>
+</footer>
+
+<script>
+  // Hamburger Menu
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Navbar shrink on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.4)' : 'none';
+  });
+
+  // Counter animation
+  function animateCounter(el) {
+    const target = +el.dataset.target;
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current).toLocaleString('en-IN');
+    }, 16);
+  }
+
+  // Intersection observer for fade-up + counters
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Trigger counters inside this element
+        entry.target.querySelectorAll('.counter').forEach(animateCounter);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submission
+  function handleSubmit(btn) {
+    const original = btn.textContent;
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = '✓ Enquiry Received!';
+      btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.disabled = false;
+        btn.style.background = '';
+      }, 3000);
+    }, 1500);
+  }
+</script>
+</body>
+</html>
